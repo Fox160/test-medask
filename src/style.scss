@@ -1,0 +1,238 @@
+//variables
+$orange: #ED462F;
+$turquiose: #66D1C6;
+$white: #FFFFFF;
+$darkGrey: #626262;
+$grey: #868686;
+$black: #000000;
+
+html, body { height: 100%; margin: 0; padding: 0; }
+
+body {
+    background-color: #494949;
+}
+
+p, span {
+    font-size: 14px;
+}
+
+.wrapper {
+    background-color: $white;
+    margin: 0 auto;
+
+    margin: auto;
+    max-width: 967px;
+    min-height: 704px;
+
+    text-align: center;
+    padding-top: 57px;
+
+    .title {
+        margin: 0;
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 30px;
+    }
+
+    .service {
+        // padding-top: 40px;
+        // margin-bottom: 73px;
+        margin: 0 63px 73px;
+        // padding-left: 63px;
+        font-size: 14px;
+        height: 90px;
+
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        clear: both;
+        overflow: scroll;
+
+        &__item--right {
+            padding-left: 30px;
+        }
+
+        &__item {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 10px;
+            margin-right: 40px;
+
+            .item-checked__img {
+                // margin-right: 10px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .item__text {
+                display: inline-block;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+
+            .item__img {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+    }
+
+    .button {
+        margin: 0px auto;
+        padding: 7px 20px;
+        position: relative;
+        bottom: 0;
+        display: block;
+        width: auto;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 18px;
+        outline: none;
+
+        &--orange {
+            color: $orange;
+            border: 1px solid $orange;
+        }
+
+        &--turquiose {
+            border: 1px solid $turquiose;
+            color: $white;
+            background-color: $turquiose;
+        }
+    
+        &--active {
+            color: $white;
+            background-color: $orange;
+        }
+    }
+}
+
+.typesInsurance {
+    margin-top: 73px;
+    margin-bottom: 53px;
+
+    &__item {
+        padding: 12px 30px;
+        color: $darkGrey;
+        background-color: $white;
+        border: 1px solid rgba($color: $black, $alpha: 0.13);
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 18px;
+
+        &:first-child {
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        &:last-child {
+            border-left: none;
+        }
+    }
+
+    &__item:focus {
+        outline: none;
+        
+    }
+
+    .typesInsurance--active {
+        background-color: $orange;
+        color: $white;
+        border-color: transparent;
+    }
+}
+
+// .mySelect {
+//     border-radius: 15px;
+
+//     &__control {
+//         border: 0;
+//         border-radius: 0;
+//       }
+  
+//       &__indicator-separator {
+//         display: none;
+//       }
+  
+//       &__menu {
+//         border-radius: 0;
+//         position: absolute;
+//         width: 100%;
+//         z-index: 100;
+//       }
+// }
+
+.option--left {
+    text-align-last: left;
+    text-align: left;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 11px;
+
+    img {
+        vertical-align: middle;
+        max-height: 25px;
+        max-width: 25px;
+        margin-right: 11px;
+    }
+
+    p {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+
+    }
+}
+
+.form {
+    margin: 0 73px;
+    margin-bottom: 38px;
+
+    &__input {
+        width: 100%;
+        border: 1px solid $grey;
+        border-radius: 50px;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        padding: 8px 0 8px 0;
+        margin-right: 26px;
+        // padding-left: 20px;
+        text-indent: 20px;
+        font-size: 18px;
+
+        &::placeholder {
+            font-size: 14px;
+
+        }
+
+
+        &:focus {
+            outline: none;
+            border-color: $turquiose;
+        }
+    }
+
+    &__label {
+        display: block;
+        text-align: left;
+        padding-left: 20px;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    &__group{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 58px;
+
+
+        .form__input {
+            &:first-child {
+                display: block;
+                margin-right: 24px;
+            }
+        }
+    }
+}
