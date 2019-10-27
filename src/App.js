@@ -1,15 +1,17 @@
 import React from 'react';
+import Popup from './Popup';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import selectStyles from './selectStyles';
+
 import insuranceCompanies from './data/insuranceCompanies'
 import services from './data/services';
 
-import cancel from './img/cancel.svg';
+import include from './img/include.svg'
+import notInclude from './img/not-include.svg'
 import notFound from './img/not-found.svg'
-// import './App.css';
+import cancel from './img/cancel.svg';
 import './style.scss';
-import { isTSEnumMember } from '@babel/types';
 
 
 class App extends React.Component {
@@ -21,16 +23,17 @@ class App extends React.Component {
       insuranceType: '',
       service: '',
       services: [],
-      activeIndex: 0,
-      isChecked: false
+      phone: '',
+      expirationDate: '',
+      isChecked: false,
+      isValid: true
     }
   }
 
   handleInput = async (event) => {
     const {value} = event.target;
     await this.setState({policyNumber: value});
-    console.log(this.state.policyNumber);
-    
+
     this.getInsuranceData();
   }
 
@@ -41,15 +44,10 @@ class App extends React.Component {
   }
 
   handleChange = (newValue, actionMeta) => {
-    console.group('Value Changed');
-    console.log(newValue);
-    console.log(`action: ${actionMeta.name}`);
-    console.groupEnd();
-
     let oldServices = [...this.state.services];
     if (actionMeta.name === 'service') {
       if (!this.isExist(newValue.value)) {
-        oldServices.push(newValue.value);
+        oldServices.push({name: newValue.value});
       }
     }
     
@@ -60,31 +58,27 @@ class App extends React.Component {
   };
 
   isExist = (value) => {
-    return this.state.services.some(item => value === item);
+    return this.state.services.some(item => value === item.name);
   }
 
 
   handleCreate = (inputValue) => {
-    console.group('Option created');
-    console.log(inputValue);
-    console.groupEnd();
-
     if (this.isExist(inputValue)) {
-      console.log('already have service in array');
+      return;
     }
     
     this.setState({
       service: inputValue,
-      services: [...this.state.services, inputValue]
+      services: [...this.state.services, {name: inputValue}]
     });
   };
 
 
   removeService = (item) => {
     var array = this.state.services.filter(function(s) { return s !== item });
-    console.log(array);
-    this.setState({services: array });
-    
+    this.setState({
+      services: array 
+    });
   }
 
   toggleClass = (name) => {
@@ -92,6 +86,14 @@ class App extends React.Component {
   }
 
   checkServices = () => {
+    if (!this.getInsuranceData()) {
+      this.setState({
+        isValid: false
+      })
+      return;
+    }
+    
+    this.getServiceData();
     this.setState({ isChecked: true})
   }
 
@@ -99,22 +101,67 @@ class App extends React.Component {
     let result = insuranceCompanies.filter(company => {
       return company.policy.find(policy => policy.number.startsWith(this.state.policyNumber))
     });
-    console.log(result[0]);
 
-    this.setState({
-      insuranceCompany: result[0].value
-    })
+    if (result.length !== 0 && this.state.policyNumber) {
+      let policyItem = result[0].policy.find(policy => policy.number.startsWith(this.state.policyNumber));
+
+      this.setState({
+        insuranceType: policyItem.type,
+        insuranceCompany: result[0].value,
+        phone: result[0].phone,
+        expirationDate: policyItem.expirationDate
+      })
+
+      return true;
+    } else {
+      this.setState({
+        insuranceType: '',
+        insuranceCompany: ''
+      })
+
+      return false;
+    }
   }
 
   getServiceData = () => {
+    let result = this.state.services.map(element => {
+      let elementType = services.find(dbElement => dbElement.value === element.name);
+      return {
+        name: element.name, 
+        type: elementType !== undefined ? elementType.type : elementType
+        }
+    });
+    this.setState({
+      services: [...result]
+    })
+  }
 
+  setServiceImg = (service) => {
+    if (service.type === 'include') {
+      return <img className='item-checked__img' src={include} alt='Включена'/>
+    } else if (service.type === 'notInclude') {
+      return <img className='item-checked__img' src={notInclude} alt='Не включена'/>
+    } else {
+      return <img className='item-checked__img' src={notFound} alt='Не найдена'/>
+    }
+  }
+
+  makeNewRequest = () => {
+    this.setState({
+      policyNumber: '',
+      insuranceCompany: '',
+      insuranceType: '',
+      service: '',
+      services: [],
+      phone: '',
+      expirationDate: '',
+      isChecked: false
+    })
   }
 
   render() {
-    let isValidFields = this.state.insuranceCompany && this.state.policyNumber && this.state.services.length > 0;
-
+    let isValidFields = this.state.insuranceCompany && this.state.insuranceType && this.state.policyNumber && this.state.services.length > 0;
     const { insuranceCompany } = this.state.insuranceCompany;
-    console.log(this.state);
     
     return (
       <div className="wrapper">
@@ -137,7 +184,7 @@ class App extends React.Component {
                 placeholder="Введите номер полиса">
               </input>
 
-              {this.state.isChecked ? <span style={{paddingLeft: '20px'}}>Дата окончания: 14.08.2020 г.</span> : null}
+              {this.state.isChecked ? <span style={{paddingLeft: '20px'}}>Дата окончания: {this.state.expirationDate} г.</span> : null}
             </div>
 
             <div style={{width: '363px', textAlign: 'left'}}>
@@ -154,7 +201,7 @@ class App extends React.Component {
                 noOptionsMessage={() => 'Страховая компания не найдена'}
                 onCreateOption={() => null}
               />
-              {this.state.isChecked ? <span style={{paddingLeft: '15px'}}>Телефон 8 (495) 123-45-67</span> : null}
+              {this.state.isChecked ? <span style={{paddingLeft: '15px'}}>Телефон {this.state.phone}</span> : null}
             </div>
             
           </div>
@@ -179,9 +226,9 @@ class App extends React.Component {
           {this.state.services.map((service, key) => {
             return (
               <div key={key} className="service__item service__item--right">
-                {this.state.isChecked ? <img className='item-checked__img' src={notFound} alt='Не найдено'/> : null}
-                <span className="item__text">{service}</span>
-                {!this.state.isChecked ? <img className='item__img' src={cancel} onClick={this.removeService.bind(this, service)} alt='Отмена'/> : null}
+                {this.state.isChecked ? this.setServiceImg(service) : null}
+                <span className="item__text">{service.name}</span>
+                {!this.state.isChecked ? <img className='item__img' src={cancel} onClick={this.removeService.bind(this, service.name)} alt='Отмена'/> : null}
               </div>
             )
           })}
@@ -189,8 +236,10 @@ class App extends React.Component {
         {!this.state.isChecked ? 
           <button onClick={isValidFields ? this.checkServices : null} className={isValidFields ? 
           "button button--orange button--active" : "button button--orange"}>Проверить</button> : 
-          <button className='button button--turquiose'>Новый запрос</button>
+          <button className='button button--turquiose' onClick={this.makeNewRequest}>Новый запрос</button>
         }
+
+        {!this.state.isValid ? <Popup/> : null}
       </div>
     )
   }

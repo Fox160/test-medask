@@ -1,18 +1,24 @@
 //variables
-$orange: #ED462F;
-$turquiose: #66D1C6;
-$white: #FFFFFF;
+$orange: #ed462f;
+$turquiose: #66d1c6;
+$white: #ffffff;
 $darkGrey: #626262;
 $grey: #868686;
 $black: #000000;
 
-html, body { height: 100%; margin: 0; padding: 0; }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     background-color: #494949;
 }
 
-p, span {
+p,
+span {
     font-size: 14px;
 }
 
@@ -34,10 +40,7 @@ p, span {
     }
 
     .service {
-        // padding-top: 40px;
-        // margin-bottom: 73px;
         margin: 0 63px 73px;
-        // padding-left: 63px;
         font-size: 14px;
         height: 90px;
 
@@ -59,7 +62,6 @@ p, span {
             margin-right: 40px;
 
             .item-checked__img {
-                // margin-right: 10px;
                 display: inline-block;
                 vertical-align: middle;
             }
@@ -75,7 +77,6 @@ p, span {
                 vertical-align: middle;
             }
         }
-
     }
 
     .button {
@@ -100,7 +101,7 @@ p, span {
             color: $white;
             background-color: $turquiose;
         }
-    
+
         &--active {
             color: $white;
             background-color: $orange;
@@ -133,7 +134,6 @@ p, span {
 
     &__item:focus {
         outline: none;
-        
     }
 
     .typesInsurance--active {
@@ -142,26 +142,6 @@ p, span {
         border-color: transparent;
     }
 }
-
-// .mySelect {
-//     border-radius: 15px;
-
-//     &__control {
-//         border: 0;
-//         border-radius: 0;
-//       }
-  
-//       &__indicator-separator {
-//         display: none;
-//       }
-  
-//       &__menu {
-//         border-radius: 0;
-//         position: absolute;
-//         width: 100%;
-//         z-index: 100;
-//       }
-// }
 
 .option--left {
     text-align-last: left;
@@ -181,7 +161,6 @@ p, span {
         display: inline-block;
         vertical-align: middle;
         font-size: 14px;
-
     }
 }
 
@@ -193,20 +172,14 @@ p, span {
         width: 100%;
         border: 1px solid $grey;
         border-radius: 50px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
         padding: 8px 0 8px 0;
         margin-right: 26px;
-        // padding-left: 20px;
         text-indent: 20px;
         font-size: 18px;
 
         &::placeholder {
             font-size: 14px;
-
         }
-
 
         &:focus {
             outline: none;
@@ -222,11 +195,10 @@ p, span {
         font-size: 18px;
     }
 
-    &__group{
+    &__group {
         display: flex;
         flex-direction: row;
         margin-bottom: 58px;
-
 
         .form__input {
             &:first-child {
