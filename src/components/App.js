@@ -4,14 +4,14 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import selectStyles from './selectStyles';
 
-import insuranceCompanies from './data/insuranceCompanies'
-import services from './data/services';
+import insuranceCompanies from '../data/insuranceCompanies'
+import services from '../data/services';
 
-import include from './img/include.svg'
-import notInclude from './img/not-include.svg'
-import notFound from './img/not-found.svg'
-import cancel from './img/cancel.svg';
-import './style.scss';
+import include from '../img/include.svg'
+import notInclude from '../img/not-include.svg'
+import notFound from '../img/not-found.svg'
+import cancel from '../img/cancel.svg';
+import '../styles/style.scss';
 
 
 class App extends React.Component {

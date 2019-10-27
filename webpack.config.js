@@ -1,6 +1,7 @@
 module.exports = {
     module: {
       rules: [
+        // SCSS
         {
           test: /\.s[ac]ss$/i,
           use: [
@@ -14,6 +15,11 @@ module.exports = {
             require.resolve('sass-loader')
           ]
         },
+        // Fonts
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: ['file-loader']
+        }
       ],
     },
   };

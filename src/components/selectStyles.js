@@ -28,20 +28,17 @@ export default {
         ...base,
         width: '100%',
         fontSize: '18px',
-        // padding: '6px',
-        // paddingLeft: '18px',
         border: state.menuIsOpen ? '1px solid #66D1C6' : '1px solid #868686',
         boxShadow: state.isFocused ? 0 : 0,
         borderRadius: state.menuIsOpen ? '15px 15px 1px 1px' : '50px',
         '&:hover': {
             borderColor: state.menuIsOpen ? '#66D1C6' : '#868686',
-            // borderColor: state.isFocused ? '#66D1C6' : '#868686',
         },
         borderBottom: state.isFocused ? 'none': '',
         overflow: 'hidden'
 
   }),
-  menu: (base, state) => ({
+  menu: (base) => ({
     ...base,
     margin: 0,
     border: '1px solid #66D1C6',
@@ -56,7 +53,7 @@ export default {
     paddingTop: 0,
     paddingBottom: 0
   }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    option: (styles, { isDisabled }) => {
       return {
         ...styles,
         '&:hover': {

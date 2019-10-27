@@ -1,9 +1,6 @@
 import React from 'react';
 import Rodal from 'rodal';
-
-// include styles
 import 'rodal/lib/rodal.css';
-import './style.scss';
 
 
 class Popup extends React.Component {
@@ -27,7 +24,7 @@ class Popup extends React.Component {
                     animation='slideDown'>
 
                     <div className="popup">
-                        <h2 style={{marginTop: '25px'}}>Полис с таким номером не обнаружен</h2>
+                        <h2 style={{fontWeight: 'bold', marginTop: '25px'}}>Полис с таким номером не обнаружен</h2>
                         <p style={{marginTop: 0, marginBottom: '30px'}}>Попробуйте изменить данные</p>
                         <button 
                             style={{padding: '10px 65px'}} 

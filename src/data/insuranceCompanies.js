@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from '../img/Logo.png'
-import lightBulb from '../img/light-bulb.png'
-import swapVertical from '../img/swap-vertical-orientation-arrows.png'
+import logo from '../img/Logo.svg'
+import lightBulb from '../img/light-bulb.svg'
+import swapVertical from '../img/swap-vertical-orientation-arrows.svg'
 
 
 export default [
